@@ -14,11 +14,12 @@ html(lang="en")
 
     body
         div(class="container")
-            div(class="jumbotron")
-                h1(class="text-center") XIN CHÀO QUẢN LÝ CHI NHÁNH
+            div(class="alert alert-primary")
+                h1(class="text-center") XIN CHÀO QUẢN LÝ CHI NHÁNH               
             div(class="row") 
                 div(class="col")
-                    h2 Danh sách nhân viên                    
+                    div(class="alert alert-success")
+                        h2(class="text-center") Danh sách nhân viên                                  
                     form
                         div(class="input-group")
                             div(class="input-group-prepend")
@@ -35,10 +36,12 @@ html(lang="en")
                             each e, i in employees                        
                                 tr
                                     th(scope="col") #{i}
-                                    th(scope="col") #{e.Ho_ten} 
+                                    th(scope="col"): span(class="text-capitalize") #{e.Ho_ten} 
                                     th(scope="col") #{e.Don_vi}  
-                div(class="col")               
-                    h2 Thống kê nhân viên theo đơn vị                    
+                div(class="col")
+                    div(class="alert alert-success")               
+                        h2(class="text-center") Thống kê nhân viên   
+                        h2(class="text-center") theo đơn vị               
                     table(class="table")
                         thead(class="thead-dark")
                             tr
