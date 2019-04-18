@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Quản lí chi nhánh
+        script(src="../js/jquery.js")
+        script(src="../js/popper.js")
+        script(src="../js/bootstrap.js")
+        script(src="../js/search.js")
+        
+        link(href="../css/bootstrap.css", rel="stylesheet")
+
+    body
+        div(class="container")
+            div(class="jumbotron")
+                h1(class="text-center") XIN CHÀO QUẢN LÝ CHI NHÁNH
+            div(class="row") 
+                div(class="col")
+                    h2 Danh sách nhân viên                    
+                    form
+                        div(class="input-group")
+                            div(class="input-group-prepend")
+                                <span class="input-group-text">Lọc danh sách</span>
+                            input(type="text", class="form-control", id="search", onkeyup="filter()") 
+                    br                               
+                    table(class="table table-striped", id="table")
+                        thead(class="thead-dark")
+                            tr
+                                th(scope="col") STT                                
+                                th(scope="col") Họ tên
+                                th(scope="col") Đơn vị
+                        tbody 
+                            each e, i in employees                        
+                                tr
+                                    th(scope="col") #{i}
+                                    th(scope="col") #{e.Ho_ten} 
+                                    th(scope="col") #{e.Don_vi}  
+                div(class="col")               
+                    h2 Thống kê nhân viên theo đơn vị                    
+                    table(class="table")
+                        thead(class="thead-dark")
+                            tr
+                                th(scope="col") Đơn vị
+                                th(scope="col") Số nhân viên
+                                th(scope="col") Tỷ lệ
+                        tbody
+                            for s in stat
+                                tr
+                                    th(scope="col") #{s.department}
+                                    th(scope="col") #{s.quantity}
+                                    th(scope="col") #{s.ratio}                        
+        

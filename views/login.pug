@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Đăng nhập
+        script(src="../js/jquery.js")
+        script(src="../js/popper.js")
+        script(src="../js/bootstrap.js")
+        link(href="../css/bootstrap.css", rel="stylesheet")
+    body
+        div(class="container")
+            div(class="jumbotron")
+                h1(class="text-center") XIN CHÀO!
+            
+            div(class="row")
+                div(class="col")          
+                div(class="col")    
+                    if(message) 
+                        div(class="alert alert-danger")
+                            h3 #{message}
+                    else 
+                        div(class="alert alert-primary")
+                            h3(class="text-center") Mời bạn đăng nhập
+                    br
+                    div
+                        form(action="/login", method="post")
+                            div(class="form-group")                
+                                label(for="username") Tên đăng nhập 
+                                input(type="email",class="form-control", name="username") 
+                            div(class="form-group")
+                                label(for="password") Mật khẩu 
+                                input(type="password",class="form-control",name="password")
+                            div(class="text-center alert alert-warning") 
+                                h5 Vị trí
+                            div(class="form-check")
+                                input(class="form-check-input", type="radio", name="title", id="employee", value="employee", checked="checked") 
+                                label(class="form-check-label", for="employee") Nhân viên
+                            div(class="form-check")
+                                input(class="form-check-input", type="radio", name="title", id="manager", value="manager") 
+                                label(class="form-check-label", for="manager") Quản lí đơn vị
+                            div(class="form-check")
+                                input(class="form-check-input", type="radio", name="title", id="s-manager", value="s-manager") 
+                                label(class="form-check-label", for="s-manager") Quản lí chi nhánh
+                            br         
+                            div(class="text-center")                                 
+                                button(type="submit", class="btn btn-success") Đăng nhập        
+                div(class="col")          
