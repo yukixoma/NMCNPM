@@ -1,3 +1,5 @@
+Deploy tại https://yukixoma-nmcnpm.glitch.me/
+
 Nhân viên đăng nhập bằng 
     Username: Email
     Password: CMND
