@@ -13,6 +13,8 @@ router.post("/login", (req, res) => {
         if (data) {
           let flStat = employee.flStat(data);
           res.render("mana", {
+            username: username,
+            password: password,
             department: department,
             employees: data,
             flStat: flStat
@@ -22,6 +24,21 @@ router.post("/login", (req, res) => {
     }
     if (!data)
       res.render("login", { message: "Sai tên hoặc mật khẩu đăng nhập" });
+  });
+});
+
+router.get("/:username/:password/:empCMND", (req, res) => {
+  let { username, password, empCMND } = req.params;
+  manager.login(username, password, "manager", (err, mdata) => {
+    if (err) res.sendStatus(500);
+    if (mdata) {
+      employee
+        .findOne({ CMND: empCMND, Don_vi: mdata.department })
+        .exec((err, edata) => {
+          if (err) res.sendStatus(500);
+          if (edata) res.render("empView", { employee: edata });
+        });
+    }    
   });
 });
 

@@ -9,11 +9,24 @@ router.post("/login", (req, res) => {
     if (data) {
       employee.empStat((err, employees, stat) => {
         if (err) res.sendStatus(500);
-        else res.render("s-mana", { employees, stat });
+        else res.render("s-mana", { username, password, employees, stat });
       });
     }
     if (!data)
       res.render("login", { message: "Sai tên hoặc mật khẩu đăng nhập" });
+  });
+});
+
+router.get("/:username/:password/:empCMND", (req, res) => {
+  let { username, password, empCMND } = req.params;
+  manager.login(username, password, "s-manager", (err, mdata) => {
+    if (err) res.sendStatus(500);
+    if (mdata) {
+      employee.findOne({ CMND: empCMND }, (err, edata) => {
+        if (err) res.sendStatus(500);
+        if (edata) res.render("empView", { employee: edata });
+      });
+    }
   });
 });
 

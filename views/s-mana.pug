@@ -7,51 +7,75 @@ html(lang="en")
         title Quản lí chi nhánh
         script(src="../js/jquery.js")
         script(src="../js/popper.js")
-        script(src="../js/bootstrap.js")
-        script(src="../js/search.js")
+        script(src="../js/bootstrap.js")        
         
         link(href="../css/bootstrap.css", rel="stylesheet")
 
+        script.
+            var employees = !{JSON.stringify(employees)}; 
+            var username = !{JSON.stringify(username)};
+            var password = !{JSON.stringify(password)};
+        script(src="../js/plusFunction.js") 
     body
         div(class="container")
             div(class="alert alert-primary")
                 h1(class="text-center") XIN CHÀO QUẢN LÝ CHI NHÁNH               
-            div(class="row") 
-                div(class="col")
-                    div(class="alert alert-success")
-                        h2(class="text-center") Danh sách nhân viên                                  
-                    form
-                        div(class="input-group")
-                            div(class="input-group-prepend")
-                                <span class="input-group-text">Lọc danh sách</span>
-                            input(type="text", class="form-control", id="search", onkeyup="filter()") 
-                    br                               
-                    table(class="table table-striped", id="table")
-                        thead(class="thead-dark")
+            br             
+            div(class="alert alert alert-secondary")
+                div(class="row")
+                    div(class="text-center col")
+                        h3 Lựa chọn chức năng
+                    div(class="text-center col")
+                        button(class="btn btn-primary" onclick="fnDisplaySelect('list')") Danh sách nhân viên
+                    div(class="text-center col")
+                        button(class="btn btn-info" onclick="fnDisplaySelect('stat')") Thống kê nhân viên
+            br
+            div(class="text-center" id="list")
+                div(class="alert alert-success")
+                    h3(class="text-center") Danh sách nhân viên                                  
+                form                       
+                    div(class="input-group")
+                        div(class="input-group-prepend")
+                            <span class="input-group-text">Lọc danh sách</span>
+                        input(type="text", class="form-control", id="search", onkeyup="filter(true)") 
+                    br  
+                    div(class="custom-control custom-radio custom-control-inline")
+                        i Lọc theo đơn vị
+                    div(class="custom-control custom-radio custom-control-inline") 
+                        input(type="radio" id="all" name="department" value="all" class="custom-control-input" onclick="filter(true)" checked="checked")
+                        label(class="custom-control-label" for="all") Tất cả
+                    for s in stat
+                        div(class="custom-control custom-radio custom-control-inline")
+                            input(type="radio" id=`${s.department}` name="department" value=`${s.department}` class="custom-control-input" onclick="filter(true)")
+                            label(class="custom-control-label" for=`${s.department}`) #{s.department}
+                br                               
+                table(class="table table-striped", id="table")
+                    thead(class="thead-dark")
+                        tr
+                            th(scope="col") STT                                
+                            th(scope="col") Họ tên
+                            th(scope="col") Đơn vị
+                            th(scope="col") Chi tiết
+                    tbody(id="listBody")
+                        each e, i in employees                        
                             tr
-                                th(scope="col") STT                                
-                                th(scope="col") Họ tên
-                                th(scope="col") Đơn vị
-                        tbody 
-                            each e, i in employees                        
-                                tr
-                                    th(scope="col") #{i}
-                                    th(scope="col"): span(class="text-capitalize") #{e.Ho_ten} 
-                                    th(scope="col") #{e.Don_vi}  
-                div(class="col")
-                    div(class="alert alert-success")               
-                        h2(class="text-center") Thống kê nhân viên   
-                        h2(class="text-center") theo đơn vị               
-                    table(class="table")
-                        thead(class="thead-dark")
+                                th(scope="col") #{i}
+                                th(scope="col"): span(class="text-capitalize") #{e.Ho_ten} 
+                                th(scope="col") #{e.Don_vi}  
+                                th(scope="col")
+                                    a(href=`./${username}/${password}/${e.CMND}` target="_blank") Chi tiết
+            div(class="text-center" id="stat" style="display:none")
+                div(class="alert alert-success")               
+                    h3(class="text-center") Thống kê nhân viên theo đơn vị               
+                table(class="table")
+                    thead(class="thead-dark")
+                        tr
+                            th(scope="col") Đơn vị
+                            th(scope="col") Số nhân viên
+                            th(scope="col") Tỷ lệ
+                    tbody
+                        for s in stat
                             tr
-                                th(scope="col") Đơn vị
-                                th(scope="col") Số nhân viên
-                                th(scope="col") Tỷ lệ
-                        tbody
-                            for s in stat
-                                tr
-                                    th(scope="col") #{s.department}
-                                    th(scope="col") #{s.quantity}
-                                    th(scope="col") #{s.ratio}                        
-        
+                                th(scope="col") #{s.department}
+                                th(scope="col") #{s.quantity}
+                                th(scope="col") #{s.ratio}    

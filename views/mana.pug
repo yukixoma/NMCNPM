@@ -5,40 +5,57 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Danh sách nhân viên
+
         script(src="../js/jquery.js")
         script(src="../js/popper.js")
         script(src="../js/bootstrap.js")
-        script(src="../js/search.js")
         
-        link(href="../css/bootstrap.css", rel="stylesheet")    
+        link(href="../css/bootstrap.css", rel="stylesheet")  
+
+        script.
+            var employees = !{JSON.stringify(employees)}; 
+            var username = !{JSON.stringify(username)};
+            var password = !{JSON.stringify(password)};
+        script(src="../js/plusFunction.js")  
     body
         div(class="container")
             div(class="alert alert-warning")
-                h1(class="text-center") XIN CHÀO QUẢN LÍ ĐƠN VỊ #{department}                
-            div(class="row")
-                div(class="text-center col")
+                h1(class="text-center") XIN CHÀO QUẢN LÍ ĐƠN VỊ #{department}   
+            br             
+            div(class="alert alert alert-secondary")
+                div(class="row")
+                    div(class="text-center col")
+                        h3 Lựa chọn chức năng
+                    div(class="text-center col")
+                        button(class="btn btn-primary" onclick="fnDisplaySelect('list')") Danh sách nhân viên
+                    div(class="text-center col")
+                        button(class="btn btn-info" onclick="fnDisplaySelect('stat')") Thống kê ngoại ngữ
+            br
+            div(class="text-center" id="list")
                     div(class="alert alert-success")
-                        h2 Danh sách nhân viên                       
+                        h3(class="text-center") Danh sách nhân viên                    
                     form
                         div(class="input-group")
                             div(class="input-group-prepend")
                                 <span class="input-group-text">Lọc danh sách</span>
-                            input(type="text", class="form-control", id="search", onkeyup="filter()")
+                            input(type="text" class="form-control" id="search" onkeyup="filter()")
                     br                        
-                    table(class="table table-striped", id="table")
+                    table(class="table table-striped" id="table")
                         thead(class="thead-dark")
                             tr
                                 th(scope="col") STT                                
                                 th(scope="col") Họ tên
-                        tbody 
+                                th(scope="col") Chi tiết                                
+                        tbody(id="listBody") 
                             each e, i in employees                        
                                 tr
                                     th(scope="col") #{i}
-                                    th(scope="col"): span(class="text-capitalize") #{e.Ho_ten}             
-                div(class="text-center col") 
+                                    th(scope="col"): span(class="text-capitalize") #{e.Ho_ten}
+                                    th(scope="col")
+                                        a(href=`./${username}/${password}/${e.CMND}` target="_blank") Chi tiết
+            div(class="text-center" id="stat" style="display:none") 
                     div(class="alert alert-success")                                  
-                        h2(class="text-center") Thống kê nhân viên 
-                        h2(class="text-center") theo ngoại ngữ                          
+                        h3(class="text-center") Thống kê nhân viên theo ngoại ngữ                          
                     table(class="table table-striped")
                         thead(class="thead-dark")
                             tr
@@ -51,5 +68,6 @@ html(lang="en")
                                     th(scope="col") #{s.language}
                                     th(scope="col") #{s.quantity}
                                     th(scope="col") #{s.ratio}
-                    
-
+            
+        
+    
