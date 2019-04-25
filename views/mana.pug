@@ -6,17 +6,17 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         title Danh sách nhân viên
 
-        script(src="../js/jquery.js")
-        script(src="../js/popper.js")
-        script(src="../js/bootstrap.js")
+        script(src="/js/jquery.js")
+        script(src="/js/popper.js")
+        script(src="/js/bootstrap.js")
         
-        link(href="../css/bootstrap.css", rel="stylesheet")  
+        link(href="/css/bootstrap.css", rel="stylesheet")  
 
         script.
             var employees = !{JSON.stringify(employees)}; 
             var username = !{JSON.stringify(username)};
             var password = !{JSON.stringify(password)};
-        script(src="../js/plusFunction.js")  
+        script(src="/js/plusFunction.js")  
     body
         div(class="container")
             div(class="alert alert-warning")

@@ -36,7 +36,7 @@ router.get("/:username/:password/:empCMND", (req, res) => {
         .findOne({ CMND: empCMND, Don_vi: mdata.department })
         .exec((err, edata) => {
           if (err) res.sendStatus(500);
-          if (edata) res.render("empView", { employee: edata });
+          if (edata) res.render("emp", { employee: edata });
         });
     }    
   });
