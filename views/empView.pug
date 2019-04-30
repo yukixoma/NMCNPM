@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Trang thông tin nhân viên        
+        script(src="/js/jquery.js")
+        script(src="/js/popper.js")
+        script(src="/js/bootstrap.js")
+        link(href="/css/bootstrap.css", rel="stylesheet")
+        style.
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+    body       
+        div(class="container")
+            div(class="jumbotron border border-info")
+                h1(class="text-center text-info") HỒ SƠ NHÂN VIÊN  
+                
+            div(class="center text-center")
+                img(class="rounded-circle mx-auto d-block",src=`/img/${employee.CMND}.png`, alt=`${employee.Ho_ten}`)                
+            br
+            table(class="table table-striped")
+                thead(class="thead-dark")
+                    tr
+                        th(scope="col") Hạng mục
+                        th(scope="col") Nội dung                        
+                tbody
+                    tr
+                        th(scope="col") Họ tên:
+                        th(scope="col"): span(class="text-capitalize") #{employee.Ho_ten}                  
+                    tr
+                        th(scope="col") Giới tính:
+                        th(scope="col") #{employee.Gioi_tinh}     
+                    tr
+                        th(scope="col") CMND:
+                        th(scope="col") #{employee.CMND}
+                    tr
+                        th(scope="col") Ngày sinh:
+                        th(scope="col") #{employee.Ngay_sinh.toLocaleDateString()}
+                    tr
+                        th(scope="col") Mức lương:
+                        th(scope="col") #{employee.Muc_luong}
+                    tr
+                        th(scope="col") Điện thoại:
+                        th(scope="col") #{employee.Dien_thoai}                        
+                    tr
+                        th(scope="col") Email:
+                        th(scope="col") #{employee.Email}
+                    
+                    tr
+                        th(scope="col") Địa chỉ:
+                        th(scope="col"): span(class="text-capitalize") #{employee.Dia_chi}
+                    tr
+                        th(scope="col") Đơn vị:
+                        th(scope="col") #{employee.Don_vi}
+                    tr
+                        th(scope="col") Khả năng ngoại ngữ:
+                        th(scope="col") 
+                            ul
+                                for nn in employee.Ngoai_ngu
+                                    li #{nn}
+    
+    

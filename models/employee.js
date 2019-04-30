@@ -1,4 +1,6 @@
-let { Schema, connect, model } = require("mongoose");
+let mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
+let { Schema, connect, model } = mongoose;
 
 connect(
   "mongodb://user:a123456@ds135796.mlab.com:35796/1788238",
@@ -74,6 +76,22 @@ employee.empStat = callback => {
         });
       });
       return callback(null, data, stat);
+    }
+  });
+};
+
+employee.updater = (username, password, updateInfo = {}, callback) => {
+  employee.login(username, password, (err, data) => {
+    if (err) callback(err, null);
+    if (data) {
+      let propName = Object.keys(updateInfo);      
+      for (let i = 0; i < propName.length; i++) {
+        data[propName[i]] = updateInfo[propName[i]];        
+      }      
+      data.save(err => {
+        if (err) return callback(err, null);
+        return callback(null, data);
+      });
     }
   });
 };

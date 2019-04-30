@@ -19,50 +19,117 @@ html(lang="en")
             div(class="jumbotron border border-info")
                 h1(class="text-center text-info") HỒ SƠ NHÂN VIÊN  
                 
-            div(class="center")
-                img(class="rounded-circle mx-auto d-block",src=`/img/${employee.CMND}.png`, alt=`${employee.Ho_ten}`)  
+            div(class="center text-center")
+                img(class="rounded-circle mx-auto d-block",src=`/img/${employee.CMND}.png`, alt=`${employee.Ho_ten}`)
+                br
+                button(type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#avatarUpdater") Cập nhật ảnh
             br
             table(class="table table-striped")
                 thead(class="thead-dark")
                     tr
                         th(scope="col") Hạng mục
                         th(scope="col") Nội dung
+                        th(scope="col") Chỉnh sửa
                 tbody
                     tr
                         th(scope="col") Họ tên:
-                        th(scope="col"): span(class="text-capitalize") #{employee.Ho_ten}                    
+                        th(scope="col"): span(class="text-capitalize") #{employee.Ho_ten}   
+                        th(scope="col")                 
                     tr
                         th(scope="col") Giới tính:
                         th(scope="col") #{employee.Gioi_tinh}
+                        th(scope="col")
                     tr
                         th(scope="col") CMND:
                         th(scope="col") #{employee.CMND}
+                        th(scope="col")
                     tr
                         th(scope="col") Ngày sinh:
                         th(scope="col") #{employee.Ngay_sinh.toLocaleDateString()}
+                        th(scope="col")
                     tr
                         th(scope="col") Mức lương:
                         th(scope="col") #{employee.Muc_luong}
+                        th(scope="col")
                     tr
                         th(scope="col") Điện thoại:
                         th(scope="col") #{employee.Dien_thoai}
+                        th(scope="col"): button(type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#phoneUpdater") Chỉnh sửa
+                        
                     tr
                         th(scope="col") Email:
                         th(scope="col") #{employee.Email}
+                        th(scope="col")
                     tr
                         th(scope="col") Địa chỉ:
                         th(scope="col"): span(class="text-capitalize") #{employee.Dia_chi}
+                        th(scope="col"): button(type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addressUpdater") Chỉnh sửa
                     tr
                         th(scope="col") Đơn vị:
                         th(scope="col") #{employee.Don_vi}
+                        th(scope="col")
                     tr
                         th(scope="col") Khả năng ngoại ngữ:
                         th(scope="col") 
                             ul
                                 for nn in employee.Ngoai_ngu
                                     li #{nn}
-                
-                                
+                        th(scope="col")
+    
+    div(class="modal" tabindex="-1" role="dialog" id="avatarUpdater")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    h5(class="modal-title") Cập nhật hình ảnh
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true") &times;             
+                div(class="modal-body")
+                    form(action="avatar" method="post" id="avatarForm" enctype="multipart/form-data")
+                        input(type="username" name="username" value=`${employee.Email}` style="display:none")
+                        input(type="password" name="password" value=`${employee.CMND}` style="display:none")
+                        div(class="custom-file")
+                            input(type="file" accept="image/png" class="custom-file-input" name="avatar" required)
+                            label(class="custom-file-label" for="customFile"): i Lưu ý: Chỉ hỗ trợ ảnh định dạng .PNG
+                        
+                div(class="modal-footer")
+                    button(type="submit" class="btn btn-primary" form="avatarForm") Cập nhật
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal") Thoát
+
+    div(class="modal" tabindex="-1" role="dialog" id="addressUpdater")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    h5(class="modal-title") Cập nhật địa chỉ
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close") 
+                        span(aria-hidden="true") &times;             
+                div(class="modal-body")
+                    form(action="address", method="post", id="addressForm")
+                        div(class="form-group")
+                            input(type="username" name="username" value=`${employee.Email}` style="display:none")
+                            input(type="password" name="password" value=`${employee.CMND}` style="display:none")
+                            label(for="address") Nhập địa chỉ mới
+                            input(type="text" class="form-control" name="address" required)
+                div(class="modal-footer")
+                    button(type="submit" class="btn btn-primary" form="addressForm") Cập nhật
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal") Thoát
+
+    div(class="modal" tabindex="-1" role="dialog" id="phoneUpdater")
+        div(class="modal-dialog" role="document")
+            div(class="modal-content")
+                div(class="modal-header")
+                    h5(class="modal-title") Cập nhật số điện thoại
+                    button(type="button" class="close" data-dismiss="modal" aria-label="Close") 
+                        span(aria-hidden="true") &times;             
+                div(class="modal-body")
+                    form(action="phone", method="post", id="phoneForm")
+                        div(class="form-group")
+                            input(type="username" name="username" value=`${employee.Email}` style="display:none")
+                            input(type="password" name="password" value=`${employee.CMND}` style="display:none")
+                            label(for="address") Nhập địa chỉ mới
+                            input(type="text" class="form-control" name="phoneNumber" required)
+                div(class="modal-footer")
+                    button(type="submit" class="btn btn-primary" form="phoneForm") Cập nhật
+                    button(type="button" class="btn btn-secondary" data-dismiss="modal") Thoát
 
                
                     

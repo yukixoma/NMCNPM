@@ -28,23 +28,6 @@ app.post("/login", (req, res) => {
   if (title == "s-manager") res.redirect(307, "s-manager/login");
 });
 
-app.get("/test", (req, res) => {
-  let data = {
-    Ho_ten: "Võ quyết Ngoạn",
-    Gioi_tinh: "Nam",
-    CMND: "040870538",
-    Ngay_sinh: new Date("1984-07-02T17:00:00.000Z"),
-    Muc_luong: 7950000,
-    Dien_thoai: "0964389900",
-    Email: "voquyetngoan@gmail.com",
-    Dia_chi:
-      "322 Bạch lâm Toàn,Phường 1,Quận 9, Ho Chi Minh City, Ho Chi Minh, Vietnam",
-    Don_vi: "A1",
-    Ngoai_ngu: ["Anh", "Nga", "Đức", "Pháp"]
-  };
-  res.render("emp", { employee: data });
-});
-
 app.use("/employee", employee);
 app.use("/manager", manager);
 app.use("/s-manager", sManager);
