@@ -1,11 +1,20 @@
+// Onpage process
+
+// Filter function 
+// Have one argument s
+// If s is false this function is use in manager page
+// Else it use in s-manager page
 function filter(s = false) {
+  // Get search term
   let search = document.getElementById("search");
   let filterTerm = search.value.toUpperCase();
 
+  // Filter result by search term
   let filtered = employees.filter(e =>
     e.Ho_ten.toUpperCase().includes(filterTerm)
   );
 
+  // Filter by department (s is true - this function use in s-manager page)
   if (s) {
     let department = document.querySelector('input[name="department"]:checked')
       .value;
@@ -14,6 +23,7 @@ function filter(s = false) {
     }
   }
 
+  // Create table contains filtered content
   let tbody = document.getElementById("listBody");
   while (tbody.firstChild) {
     tbody.removeChild(tbody.firstChild);
@@ -58,6 +68,7 @@ function filter(s = false) {
   }
 }
 
+// Select display screen - between list screen and stat screen
 function fnDisplaySelect(func = "") {
   let list = document.getElementById("list");
   let stat = document.getElementById("stat");

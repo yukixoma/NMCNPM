@@ -1,7 +1,12 @@
+// Employee model
+// Use mongoose driver for MongoDB
+// https://mongoosejs.com/
 let mongoose = require("mongoose");
 mongoose.set("useFindAndModify", false);
+
 let { Schema, connect, model } = mongoose;
 
+// Connect to database
 connect(
   "mongodb://user:a123456@ds135796.mlab.com:35796/1788238",
   {
@@ -9,6 +14,7 @@ connect(
   }
 );
 
+// Declare employee model schema - employee model data structure
 let employeeSchema = new Schema(
   {
     Ho_ten: String,
@@ -25,8 +31,11 @@ let employeeSchema = new Schema(
   { collection: "employee" }
 );
 
+// Export employee model
 let employee = (module.exports = model("employee", employeeSchema));
 
+// Declare employee model functions
+// Login function
 employee.login = (username, password, callback) => {
   employee.findOne({ Email: username, CMND: password }).exec((err, data) => {
     if (err) return callback(err, null);
@@ -34,6 +43,7 @@ employee.login = (username, password, callback) => {
   });
 };
 
+// Listing employee in one department
 employee.listByDepartment = (department, callback) => {
   employee.find({ Don_vi: department }, (err, data) => {
     if (err) return callback(err, null);
@@ -41,6 +51,7 @@ employee.listByDepartment = (department, callback) => {
   });
 };
 
+// Employee language proficiency statistics
 employee.flStat = (employees = []) => {
   let flStat = [];
   let fl = ["Anh", "Pháp", "Nga", "Đức", "Brasil"];
@@ -59,6 +70,7 @@ employee.flStat = (employees = []) => {
   return flStat;
 };
 
+// Employee by department in percent
 employee.empStat = callback => {
   let stat = [];
   let dmp = ["A1", "A2", "B1", "B2", "B3", "B4"];
@@ -80,6 +92,8 @@ employee.empStat = callback => {
   });
 };
 
+// Employee updater
+// Update employee information if authorized (by login function)
 employee.updater = (username, password, updateInfo = {}, callback) => {
   employee.login(username, password, (err, data) => {
     if (err) callback(err, null);

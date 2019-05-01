@@ -75,7 +75,8 @@ html(lang="en")
                                 for nn in employee.Ngoai_ngu
                                     li #{nn}
                         th(scope="col")
-    
+
+    // avatar update modal
     div(class="modal" tabindex="-1" role="dialog" id="avatarUpdater")
         div(class="modal-dialog" role="document")
             div(class="modal-content")
@@ -95,6 +96,7 @@ html(lang="en")
                     button(type="submit" class="btn btn-primary" form="avatarForm") Cập nhật
                     button(type="button" class="btn btn-secondary" data-dismiss="modal") Thoát
 
+    // address update modal
     div(class="modal" tabindex="-1" role="dialog" id="addressUpdater")
         div(class="modal-dialog" role="document")
             div(class="modal-content")
@@ -113,6 +115,7 @@ html(lang="en")
                     button(type="submit" class="btn btn-primary" form="addressForm") Cập nhật
                     button(type="button" class="btn btn-secondary" data-dismiss="modal") Thoát
 
+    // phone number update modal
     div(class="modal" tabindex="-1" role="dialog" id="phoneUpdater")
         div(class="modal-dialog" role="document")
             div(class="modal-content")

@@ -1,7 +1,13 @@
 let router = require("express").Router();
+
+// Import manager and employee model
 let manager = require("../models/manager");
 let employee = require("../models/employee");
 
+
+// Process login request
+// If success render manager (Quản lí đơn vị) page
+// If fail redirect to login page with error message
 router.post("/login", (req, res) => {
   let { username, password, title } = req.body;
   manager.login(username, password, title, (err, data) => {
@@ -27,6 +33,8 @@ router.post("/login", (req, res) => {
   });
 });
 
+// Employee detailed infomation view
+// If request is authorized, render employee information view page
 router.get("/:username/:password/:empCMND", (req, res) => {
   let { username, password, empCMND } = req.params;
   manager.login(username, password, "manager", (err, mdata) => {

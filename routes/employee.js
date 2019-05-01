@@ -1,7 +1,11 @@
 let router = require("express").Router();
 let fs = require("fs");
+
+// Import employee model
 let employee = require("../models/employee");
 
+// Multer middle ware - handle file-upload
+// https://github.com/expressjs/multer
 let multer = require("multer");
 let storage = multer.diskStorage({
   destination: "tmp",
@@ -11,6 +15,9 @@ let storage = multer.diskStorage({
 });
 let upload = multer({ storage }).single("avatar");
 
+// Process login request
+// If success render employee page
+// If fail redirect to login page with error message
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
   employee.login(username, password, (err, data) => {
@@ -21,6 +28,9 @@ router.post("/login", (req, res) => {
   });
 });
 
+// Change avatar
+// If request is authorized, server recieve image at tmp directory 
+// Then move it to public/image
 router.post("/avatar", upload, (req, res) => {
   let { username, password } = req.body;
   employee.login(username, password, (err, data) => {
@@ -34,6 +44,8 @@ router.post("/avatar", upload, (req, res) => {
   });
 });
 
+// Change address
+// Call employee model updater function to handle this
 router.post("/address", (req, res) => {
   let { username, password, address } = req.body;
   employee.updater(username, password, { Dia_chi: address }, (err, data) => {
@@ -42,6 +54,8 @@ router.post("/address", (req, res) => {
   });
 });
 
+// Change phone number
+// Call employee model updater function to handle this
 router.post("/phone", (req, res) => {
   let { username, password, phoneNumber } = req.body;
   employee.updater(
